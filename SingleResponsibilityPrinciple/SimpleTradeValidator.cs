@@ -32,7 +32,14 @@ namespace SingleResponsibilityPrinciple
                 logger.LogWarning("Trade not a valid integer: '{0}'", tradeData[1]);
                 return false;
             }
-
+            //Request 403 - "As a Traders I want to prevent dangerous trades
+            //so that one typo doesn't ruin the company."  
+            //Details: Trade amounts must be between 1,000 and 100,000 units. 
+            if (!((tradeAmount >= 1000) & (tradeAmount <= 100000)))
+            {
+                logger.LogWarning("Trade not a valid amount: '{0}'", tradeAmount);
+                return false;
+            }
             decimal tradePrice;
             if (!decimal.TryParse(tradeData[2], out tradePrice))
             {
